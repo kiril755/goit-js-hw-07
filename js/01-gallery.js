@@ -33,17 +33,19 @@ function selectItem(event) {
     if (event.target.nodeName != "IMG") {
         return
     }
-
-    basicLightbox.create(`
-    <img width="1400" height="900" src="${event.target.dataset.source}">
-    `).show()
-
-    
+    const instance  = basicLightbox.create(`
+      <img width="1400" height="900" src="${event.target.dataset.source}">
+    `, {onShow: (instance) => {
+      
+      document.addEventListener("keydown", function(e) {
+        if ( e.key === "Escape" ) {
+          instance.close();
+        }
+      }) 
+    }})
   
-  }
 
-// function wichKeyIsЗressed(event) {
-//     console.log(event.keyup)
-// }
+    instance.show()
 
-// console.log(wichKeyIsЗressed())
+}
+ 
